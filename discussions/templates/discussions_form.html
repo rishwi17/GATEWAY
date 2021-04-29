@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- BOX ICONS CSS-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'discussions/submit.css' %}" />
+    <title>New Discussion</title>
+    <link rel="icon" href="{% static 'discussions/GW_1.png' %}"/>
+  </head>
+<body>
+
+    <a href="{% url 'complaints_list' %}"><button class = "back_button" >Back</button></a>
+    <br>
+
+    <p class="hello">Start a Discussion</p>
+
+
+    <div class="container">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {% if messages %}
+              <ul class="messages">
+              {% for message in messages %}
+              <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+              {% endfor %}
+              </ul>
+            {% endif %}
+            {{ form.non_field_errors }}
+
+            <div class="row">
+                <div class="col-25">
+                  <h2>Title</h2>
+                </div>
+
+                <div class="col-75">
+                    {{ form.title.errors }}
+                    <div id="fname">{{ form.title }}</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-25">
+                  <h2>Body</h2>
+                </div>
+
+                <div class="col-75">
+                    {{ form.body.errors }}
+                    <div id="subject" style="height: 200px">{{ form.body }}</div>
+                </div>
+            </div>
+            <input type="submit" class="btn" value="Done" />
+        </form>
+    </div>
+</body>
+</html>

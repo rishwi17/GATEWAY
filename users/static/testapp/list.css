@@ -1,0 +1,370 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap');
+/*===== VARIABLES CSS Y SASS =====*/
+/*Varibles sass*/
+/*Variables css*/
+/*===== Colores =====*/
+:root {
+    --first-color: #333;
+    --second-color: #f7635b;
+    --white-color: white;
+}
+
+/*===== Fuente y tipografia =====*/
+:root {
+    --body-font: 'Quicksand', sans-serif;
+    --small-font-size: 0.875rem;
+}
+
+@media screen and (min-width: 768px) {
+    :root {
+        --small-font-size: 0.938rem;
+    }
+}
+
+/*===== z index =====*/
+:root {
+    --z-back: -10;
+    --z-normal: 1;
+    --z-tooltip: 10;
+    --z-fixed: 100;
+    --z-modal: 1000;
+}
+
+/*===== BASE =====*/
+*,
+::before,
+::after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+    margin: 0;
+
+    font-family: var(--body-font);
+    background-color: var(--white-color);
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+
+h1 {
+    margin: 0;
+}
+
+ul,
+li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+/*=====  NAV =====*/
+.l-navbar {
+    position: fixed;
+
+    bottom: 0;
+    left: 0;
+    width: 56px;
+    height: 100vh;
+    background-color: var(--first-color);
+    padding: 1.25rem 0.5rem 2rem;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    z-index: var(--z-fixed);
+}
+
+.nav {
+    padding-top: 200px;
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.nav__logo {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 0 0.5rem;
+}
+
+.nav__logo-icon {
+    margin-right: 1.2rem;
+}
+
+.nav__logo-text {
+    color: var(--white-color);
+    font-weight: 700;
+}
+
+.nav__toggle {
+    position: absolute;
+    top: 7.1rem;
+    right: 1rem;
+    width: 30px;
+    height: 30px;
+    background-color: var(--second-color);
+    border-radius: 50%;
+    font-size: 1.25rem;
+    color: var(--first-color);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    cursor: pointer;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+
+.nav__link {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 0.5rem;
+    margin-bottom: 1.4rem;
+    border-radius: 0.5rem;
+    color: var(--white-color);
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.nav__link:hover {
+    background-color: var(--second-color);
+    color: var(--first-color);
+}
+
+.nav__icon {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+}
+
+.nav__text {
+    font-weight: 700;
+}
+
+/*Show menu*/
+.show {
+    width: 250px;
+}
+
+/*Rotate toggle*/
+.rotate {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+
+/*Active links menu*/
+.active {
+    background-color: var(--second-color);
+    color: var(--first-color);
+}
+
+/*Add padding body*/
+.expander {
+    padding-left: 14rem;
+    -webkit-transition: 0.5s;
+    transition: 0.3s;
+}
+
+/* nav bar css*/
+
+header {
+    z-index: var(--z-modal);
+    position: static;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px 12% 20px 5%;
+    background-color: #333;
+}
+
+.logo {
+    margin-right: auto;
+    height: 70px;
+}
+
+.cta {
+    border-radius: 50%;
+    height: 70px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+/* Mobile Nav */
+
+.menu {
+    display: none;
+}
+.overlay {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    background-color: #dc6862;
+    overflow-x: hidden;
+    transition: all 0.5s ease 0s;
+}
+
+.overlay--active {
+    width: 100%;
+}
+
+.overlay__content {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.overlay a {
+    padding: 15px;
+    font-size: 36px;
+    display: block;
+    transition: all 0.3s ease 0s;
+}
+
+.overlay a:hover,
+.overlay a:focus {
+    color: #333;
+}
+.overlay .close {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+    color: #edf0f1;
+    cursor: pointer;
+}
+@media screen and (max-height: 450px) {
+    .overlay a {
+        font-size: 20px;
+    }
+    .overlay .close {
+        font-size: 40px;
+        top: 15px;
+        right: 35px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .nav__links {
+        display: none;
+    }
+}
+@media only screen and (max-width: 520px) {
+    .nav__toggle {
+        display: none;
+    }
+}
+
+/*cards css*/
+
+.cards {
+    background-color: #f0f0f0;
+    color: #999999;
+    font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: 0;
+    padding-left: 10%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+}
+.cards__item {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    width: 25%;
+}
+.card {
+    background-color: white;
+    border-radius: 0.25rem;
+    box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+    padding: 10%;
+
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width: 90%;
+}
+
+.heading {
+    color: #333;
+    font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 50px;
+    font-size: 42px;
+    font-weight: 600;
+    line-height: 72px;
+    padding: auto;
+    text-align: center;
+}
+
+.card__title {
+    color: #696969;
+    font-size: 1.25rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+.card__title:hover {
+    color: #f7635b;
+    cursor: default;
+}
+.card__text {
+    flex: 1 1 auto;
+    font-size: 1.2rem;
+    line-height: 1;
+    margin-bottom: 1.25rem;
+}
+
+@media screen and (max-width: 1000px) {
+    .cards__item {
+        width: 33.33%;
+    }
+}
+@media screen and (max-width: 650px) {
+    .cards__item {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .cards__item {
+        width: 100%;
+    }
+}

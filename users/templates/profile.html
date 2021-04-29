@@ -1,0 +1,142 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Profile</title>
+    <link rel="icon" href="{% static 'complaints/GW_1.png' %}"/>    <link rel="stylesheet" type="text/css" href="{% static 'testapp/profile.css' %}" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Flavors&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!--NAVIGATION BAR -->
+    <header>
+      <img class="logo" src="{% static 'testapp/logo.png' %}" alt="" />
+
+      <a href="{% url 'profile' %}">
+        <img class="cta" alt="avatar" src="{% static 'testapp/avatar.svg' %}" />
+      </a>
+    </header>
+
+    <!-- Page content -->
+
+    <div class="outer-container">
+      <div class="left-container">
+        <div class="cards">
+          <div class="back">
+            <!-- display details -->
+
+            <div class="left-content">
+              <div>
+                <a href="{% url 'resident_update' user.id %}"><button class="bt-edit">Edit</button></a>
+              </div>
+
+              <div class="username">
+                <div class="left" style="color: #525f7f">
+                  <h3>USERNAME</h3>
+                </div>
+                <div class="right" style="color: #8898aa; font-weight: 600">
+                  {{ user.username }}
+                </div>
+              </div>
+
+              <!-- line breaks -->
+              <hr
+                style="
+                  border-top: 1px dotted rgb(110, 103, 103);
+                  width: 90%;
+                  align-self: center;
+                "
+              />
+
+              <div class="email">
+                <div class="left" style="color: #525f7f">
+                  <h3>EMAIL</h3>
+                </div>
+                <div class="right" style="color: #8898aa; font-weight: 600">
+                  {{ user.email }}
+                </div>
+              </div>
+
+              <!-- line breaks -->
+              <hr
+                style="
+                  border-top: 1px dotted rgb(110, 103, 103);
+                  width: 90%;
+                  align-self: center;
+                "
+              />
+
+              <div class="flat-details">
+                <div class="left" style="color: #525f7f">
+                  <h3>FLAT NUMBER</h3>
+                </div>
+                <div class="right" style="color: #8898aa; font-weight: 600">
+                    {{ user.flatNo }}
+                </div>
+              </div>
+
+              <!-- line breaks -->
+              <hr
+                style="
+                  border-top: 1px dotted rgb(110, 103, 103);
+                  width: 90%;
+                  align-self: center;
+                "
+              />
+
+              <div class="car-owned-details">
+                <div class="left" style="color: #525f7f">
+                  <h3>VEHICLES OWNED</h3>
+                </div>
+                <div
+                  class="right"
+                  style="color: #8898aa; font-weight: 600; text-align: right"
+                >
+                 <a href="{% url 'vehicle-create' %}"><button class="bt-edit">Add Vehicle</button></a>
+                </div>
+              </div>
+
+              <!-- one owned car details -->
+
+             {% for vehicle in object_list %}
+             <div class="car-owned-details">
+                <div style="flex: 10%">
+                <a href="{% url 'vehicle-delete' vehicle.id %}"> 
+                  <button class="toggle-btn">X</button>
+                </a>
+                </div>
+                <div class="left" style="color: #595a5e; text-align: center">
+                  <h3>{{vehicle.name}}</h3>
+                </div>
+                <div class="right" style="color: #6b7580; font-weight: 900">
+                  <h4>{{vehicle.number}}</h4>
+                </div>
+              </div>
+             {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="right-container">
+        <div class="cards">
+          <a href="#"><button class="btn-1">Visitors Log</button></a>
+          <a href="#"><button class="btn-1">Parking Log</button></a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+

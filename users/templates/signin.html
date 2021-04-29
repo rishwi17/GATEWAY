@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sign In</title>
+    <link rel="icon" href="{% static 'testapp/GW_1.png' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'testapp/123.css' %}" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <!--NAVIGATION BAR -->
+    <header>
+      <a class="logo" href="/">GATEWAY</a>
+      <nav>
+      </nav>
+      <a class="cta" href="{% url 'signup' %}">Register</a>
+    </header>
+    
+
+    <!-- LOGIN CONTAINER -->
+    <div class="container">
+      <div class="img">
+        <img src="{% static 'testapp/bg.svg' %}" />
+      </div>
+      <div class="login-content">
+          <form method="POST">
+            {% csrf_token %}
+            <img src="{% static 'testapp/avatar.svg' %}" />
+            <h2 class="title">Welcome</h2>     
+            {% if messages %}
+              <ul class="messages">
+              {% for message in messages %}
+              <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+              {% endfor %}
+              </ul>
+            {% endif %}
+            {{ form.non_field_errors }}
+            <div class="input-div one">
+            <div class="i">
+              <i class="fas fa-user"></i>
+            </div>
+            <div class="div">
+              {{ form.username.errors }}
+                <h5>Username</h5>
+                {{ form.username }}
+            </div>
+          </div>
+          <div class="input-div pass">
+            <div class="i">
+              <i class="fas fa-lock"></i>
+            </div>
+            <div class="div" >
+              {{ form.password.errors }}
+              <h5>Password</h5>
+              {{ form.password }}
+            </div>
+          </div>
+          <a href="{% url 'password_reset' %}">Forgot Password?</a>
+          <input type="hidden" name="next" value="{{ request.GET.next }}"/>
+          <input type="submit" class="btn" value="Login" />
+        </form>
+      </div>
+    </div>
+    <!--  -->
+    <script type="text/javascript" src="{% static 'testapp/123.js' %}"></script>
+  </body>
+</html>

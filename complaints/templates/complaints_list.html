@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- STYLES CSS -->
+    <link rel="stylesheet" href="{% static 'complaints/dashboard.css' %}" />
+
+    <!-- BOX ICONS CSS-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <title>Complaints</title>
+    <link rel="icon" href="{% static 'complaints/GW_1.png' %}"/>
+  </head>
+  <body id="body">
+    <div class="l-navbar" id="navbar">
+      <nav class="nav">
+        <div>
+          <div class="nav__toggle" id="nav-toggle">
+            <i class="bx bx-chevron-right"></i>
+          </div>
+
+          <ul class="nav__list">
+            <a href="{% url 'announcements_list' %}" class="nav__link">
+              <i class="bx bx-grid-alt nav__icon"></i>
+              <span class="nav__text">ANNOUNCEMENT</span>
+            </a>
+            <a href="{% url 'complaints_list' %}" class="nav__link active">
+              <i class="bx bx-bell nav__icon"></i>
+              <span class="nav__text">COMPLAINS</span>
+            </a>
+            <a href="{% url 'contacts_list' %}" class="nav__link">
+              <i class="bx bx-user nav__icon"></i>
+              <span class="nav__text">CONTACTS</span>
+            </a>
+
+            <a href="{% url 'discussions_list' %}" class="nav__link">
+              <i class="bx bx-message-rounded nav__icon"></i>
+              <span class="nav__text">DISCUSSIONS</span>
+            </a>
+          </ul>
+        </div>
+        <a href="{% url 'logout' %}" class="nav__link">
+          <i class="bx bx-log-out-circle nav__icon"></i>
+          <span class="nav__text">Logout</span>
+        </a>
+      </nav>
+    </div>
+
+    <!--NAVIGATION BAR -->
+
+    <header id="top">
+      <img class="logo" src="{% static 'complaints/logo.png' %}" alt="" />
+
+      <a href="{% url 'profile' %}">
+        <img
+          class="cta"
+          alt="avatar"
+          src="{% static 'complaints/avatar.svg' %}"
+        />
+      </a>
+    </header>
+
+    <!--INTRO SECTION-->
+
+    <div class="hero-wrapper">
+      <div class="hello">
+        <div class="notice">
+          <h1>COMPLAINTS</h1>
+        </div>
+        <div class="hero-copy-container">
+          {% for complaint in object_list %}
+          <div class="card-container">
+            <div class="card">
+              <a href="#" style="cursor: default">
+                <div class="card--display">
+                  <h2>{{ complaint.title }}</h2>
+                </div>
+                <div class="card--hover">
+                  <p>{{ complaint.description }}</p>
+                </div>
+              </a>
+              <div class="card--border"></div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="paginator">
+          {% if is_paginated %} {% if page_obj.has_previous %}
+          <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+          <a
+            class="btn btn-outline-info mb-4"
+            href="?page={{ page_obj.previous_page_number }}"
+            >Previous</a
+          >
+          {% endif %} {% if page_obj.has_next %}
+          <a
+            class="btn btn-outline-info mb-4"
+            href="?page={{ page_obj.next_page_number }}"
+            >Next</a
+          >
+          <a
+            class="btn btn-outline-info mb-4"
+            href="?page={{ page_obj.paginator.num_pages }}"
+            >Last</a
+          >
+          {% endif %} {% endif %}
+        </div>
+      </div>
+
+      <div class="cards">
+        <div class="back">
+          <img
+            class="logo"
+            src="{% static 'complaints/avatar.svg' %}"
+            alt="John"
+            style="width: 100%"
+          />
+          <h1>{{ user.username }}</h1>
+          <p>{{ user.flatNo }}</p>
+        </div>
+        <a href="{% url 'complaints_create' %}"><button>Register a complaint</button></a>
+        <a href="{% url 'events:calendar' %}"><button>Calender</button></a>
+        <a href="{% url 'users_list' %}"><button>Neighbours</button></a>
+      </div>
+    </div>
+  </body>
+  <!-- MAIN JS -->
+  <script src="{% static 'complaints/dashboard.js' %}"></script>
+</html>

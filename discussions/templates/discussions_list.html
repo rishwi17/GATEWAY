@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- BOX ICONS CSS-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="{% static 'discussions/discussion.css' %}" />
+    <title>Discussion</title>
+    <link rel="icon" href="{% static 'discussions/GW_1.png' %}" />
+  </head>
+  <body id="body">
+    <div class="l-navbar" id="navbar">
+      <nav class="nav">
+        <div>
+          <div class="nav__toggle" id="nav-toggle">
+            <i class="bx bx-chevron-right"></i>
+          </div>
+
+          <ul class="nav__list">
+            <a href="{% url 'announcements_list' %}" class="nav__link">
+              <i class="bx bx-grid-alt nav__icon"></i>
+              <span class="nav__text">ANNOUNCEMENT</span>
+            </a>
+            <a href="{% url 'complaints_list' %}" class="nav__link">
+              <i class="bx bx-bell nav__icon"></i>
+              <span class="nav__text">COMPLAINS</span>
+            </a>
+            <a href="{% url 'contacts_list' %}" class="nav__link">
+              <i class="bx bx-user nav__icon"></i>
+              <span class="nav__text">CONTACTS</span>
+            </a>
+
+            <a href="{% url 'discussions_list' %}" class="nav__link active">
+              <i class="bx bx-message-rounded nav__icon"></i>
+              <span class="nav__text">DISCUSSIONS</span>
+            </a>
+          </ul>
+        </div>
+        <a href="{% url 'logout' %}" class="nav__link">
+          <i class="bx bx-log-out-circle nav__icon"></i>
+          <span class="nav__text">Logout</span>
+        </a>
+      </nav>
+    </div>
+    <!--NAVIGATION BAR -->
+    <header>
+      <img class="logo" src="{% static 'discussions/logo.png' %}" alt="" />
+
+      <a href="{% url 'profile' %}">
+        <img class="cta" alt="avatar" src="{% static 'discussions/avatar.svg' %}" />
+      </a>
+    </header>
+
+    <!--main body-->
+    <h1 class="heading">Discussions</h1>
+    <a href="{% url 'discussions_create' %}"><button class="bt-edit">+ Add</button></a>
+    <div class="hello">
+      {% for discussion in object_list %}
+      <li>
+        <a href="{% url 'discussions_detail' discussion.id %}"
+          >
+          <h1>{{ discussion.title }}</h1>
+          <p>
+           {{ discussion.body }}
+          </p>
+        </a>
+      </li>
+      {% endfor %}
+    </div>
+    <script src="{% static 'discussions/dashboard.js' %}"></script>
+</body>
+</html>
